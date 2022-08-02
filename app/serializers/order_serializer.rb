@@ -7,5 +7,5 @@ class OrderSerializer
   attribute :total do |object|
     '%.2f' %object.total
   end
-  # has_many :items
+  has_many :items
 end

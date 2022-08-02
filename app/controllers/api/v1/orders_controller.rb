@@ -7,6 +7,6 @@ class Api::V1::OrdersController < ApplicationController
 
   def best_customers
     @orders = Order.best_customers
-    render json: OrdersSerializer.new(@orders).serializable_hash, status: :ok
+    render json: OrderSerializer.new(@orders).serializable_hash, status: :ok
   end
 end

@@ -3,7 +3,7 @@ class Order < ApplicationRecord
   has_many :items
 
   # Scopes
-  scope :best_customers, -> { order(total).limit(5) }
+  scope :best_customers, -> { order(total: :desc).limit(5) }
 
   # Methods
 end

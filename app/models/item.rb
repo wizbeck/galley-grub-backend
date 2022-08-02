@@ -3,7 +3,7 @@ class Item < ApplicationRecord
   belongs_to :order
 
   # Enum integers for item types
-  enum type: { entree: 1, side: 2, drink: 3 }
+  enum item_type: { 'entree' => 1, 'side' => 2, 'drink' => 3 }
 
   # Scopes
   scope :entrees, -> { where(type: :entree) }

@@ -1,0 +1,2 @@
+class OrderItemTopping < ApplicationRecord
+end

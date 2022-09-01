@@ -1,0 +1,2 @@
+class ItemTopping < ApplicationRecord
+end

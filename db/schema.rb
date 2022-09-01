@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_01_011849) do
+ActiveRecord::Schema.define(version: 2022_08_27_222140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "item_toppings", force: :cascade do |t|
+    t.bigint "item_id"
+    t.bigint "topping_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_item_toppings_on_item_id"
+    t.index ["topping_id"], name: "index_item_toppings_on_topping_id"
+  end
 
   create_table "items", force: :cascade do |t|
     t.string "name"
@@ -23,6 +32,24 @@ ActiveRecord::Schema.define(version: 2022_08_01_011849) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["order_id"], name: "index_items_on_order_id"
+  end
+
+  create_table "order_item_toppings", force: :cascade do |t|
+    t.bigint "item_topping_id"
+    t.bigint "order_item_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_topping_id"], name: "index_order_item_toppings_on_item_topping_id"
+    t.index ["order_item_id"], name: "index_order_item_toppings_on_order_item_id"
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.bigint "order_id"
+    t.bigint "item_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_order_items_on_item_id"
+    t.index ["order_id"], name: "index_order_items_on_order_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -42,5 +69,4 @@ ActiveRecord::Schema.define(version: 2022_08_01_011849) do
     t.index ["item_id"], name: "index_toppings_on_item_id"
   end
 
-  add_foreign_key "items", "orders"
 end

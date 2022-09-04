@@ -9,8 +9,13 @@ Rails.application.routes.draw do
           get :best_customers
         end
       end
-      resources :items
+      resources :items do
+        get :active
+      end
       resources :toppings
+      resources :order_items
+      resources :item_toppings
+      resources :order_item_toppings
       # End Resources
     end
   end

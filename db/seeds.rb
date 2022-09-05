@@ -26,11 +26,32 @@ Topping.destroy_all if Topping.exists?
 ItemTopping.destroy_all if ItemTopping.exists?
 
 # Build the items and toppings
-ENTREES = [
+  # we can clone a order item, with certain toppings, and additional items as a combo
+
+# Entree items ala carte
+A_LA_CARTE = [
   'Krabby Patty',
   'Double Krabby Patty',
-  'Triple Krabby Patty',
+  'Triple Krabby Patty'
+].freeze
 
+SIDES = [
+  'Coral Bits',
+  'Kelp Rings'
+].freeze
+
+# Figure out what each combo meal should have in addition to the entree
+COMBOS = [
+  'Krabby Meal',
+  'Double Krabby Meal',
+  'Triple Krabby Meal',
+  'Salty Sea Dog',
+  'Footlong',
+  'Sailors Surprise',
+  'Golden Loaf'
 ]
 
-
+DRINKS = [
+  'Kelp Shake',
+  'Seafoam Soda'
+]

@@ -3,8 +3,9 @@ class Order < ApplicationRecord
   has_many :order_items, dependent: :destroy
   has_many :order_item_toppings, through: :order_items
 
-  # Accept nested attributes for order_items, item_toppings?
+  # Accept nested attributes for order_items
   accepts_nested_attributes_for :order_items
+
   # Scopes
   scope :best_customers, -> { order(total: :desc).limit(5) }
 

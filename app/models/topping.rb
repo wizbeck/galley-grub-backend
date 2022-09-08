@@ -1,6 +1,6 @@
 class Topping < ApplicationRecord
   # Relationships
-  has_many :items
+  has_many :item_toppings
 
   # Scopes
 

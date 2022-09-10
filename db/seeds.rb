@@ -1,21 +1,7 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
-
-# This seed file needs to do the following:
-#   1. Create items that match with the Krusty Krab Galley Grub menu
-#   2. Create realistic toppings that coincide with certain menu_items, set category
-#     - check the relationship with category of an item, vs the category type on a topping.
-#     - We might need to create a category object, which holds the name and some sort of id/integer to distinguish 
-#       the category
-#
-
-# Destroy user related records
+# Destroy user created records
 Order.destroy_all if Order.exists?
 OrderItem.destroy_all if OrderItem.exists?
 OrderItemTopping.destroy_all if OrderItemTopping.exists?
@@ -24,9 +10,6 @@ OrderItemTopping.destroy_all if OrderItemTopping.exists?
 Item.destroy_all if Item.exists?
 Topping.destroy_all if Topping.exists?
 ItemTopping.destroy_all if ItemTopping.exists?
-
-# Build the items and toppings
-# we can clone a order item, with certain toppings, and additional items as a combo
 
 # Items
 items = [
@@ -43,7 +26,7 @@ items = [
   { name: 'Golden Loaf', price: 2.00, item_type: 'entree' }
 ]
 
-# Create Items
+# Create items
 Item.create(items)
 
 # Toppings
@@ -56,34 +39,17 @@ toppings = [
   { name: 'sea cheese', price: 0.25 }
 ]
 
-# Create Toppings
+# Create toppings
 Topping.create(toppings)
 
 # Associate toppings to items via item_toppings
 entree_toppings = Topping.where(name: ['sauce', 'salty sauce', 'sea cheese']).map { |t| { topping_id: t.id } }
 
-# Associate toppings to  entree items
+# Associate toppings to entree items
 entrees = Item.entree
 entrees.each { |e| e.item_toppings.create(entree_toppings) }
 
 # Associate toppings to sides and drinks
-
 sides_drinks = Item.where(item_type: %w[side drink])
 size_toppings = Topping.where(name: %w[small medium large]).map { |t| { topping_id: t.id } }
 sides_drinks.each { |sd| sd.item_toppings.create(size_toppings) }
-
-
-# TODO: Figure out how to build combos into a method of creating OrderItem, with OrderItem Toppings.
-  # Maybe send messages or api requests to return the specific orderitems with toppings prebuilt
-
-COMBO_MESSAGES = [
-  'Krabby Meal',
-  'Double Krabby Meal',
-  'Triple Krabby Meal',
-  'Salty Sea Dog',
-  'Footlong',
-  'Sailors Surprise',
-  'Golden Loaf'
-]
-
-

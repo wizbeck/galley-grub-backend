@@ -26,22 +26,22 @@ Topping.destroy_all if Topping.exists?
 ItemTopping.destroy_all if ItemTopping.exists?
 
 # Build the items and toppings
-  # we can clone a order item, with certain toppings, and additional items as a combo
+# we can clone a order item, with certain toppings, and additional items as a combo
 
-# Entree items ala carte
-A_LA_CARTE = [
-  'Krabby Patty',
-  'Double Krabby Patty',
-  'Triple Krabby Patty'
-].freeze
+# Create Entrees
+items = [
+  { name: 'Krabby Patty', price: 1.25, item_type: 'entree' },
+  { name: 'Double Krabby Patty', price: 2.00, item_type: 'entree' },
+  { name: 'Triple Krabby Patty', price: 3.00, item_type: 'entree' },
+  { name: 'Coral Bits', item_type: 'side' }, # sides default to 0. small, medium, large toppings are prices
+  { name: 'Kelp Rings', price: 1.50, item_type: 'side' },
+  { name: 'Kelp Shake', price: 2.00, item_type: 'drink' },
+  { name: 'Seafoam Soda', item_type: 'drink' } # Drink item, with small, med, large toppings
+]
 
-SIDES = [
-  'Coral Bits',
-  'Kelp Rings'
-].freeze
-
-# Figure out what each combo meal should have in addition to the entree
-COMBOS = [
+# TODO: Figure out how to build combos into a method of creating OrderItem, with OrderItem Toppings.
+ # Maybe send messages or api requests to return the specific orderitems with toppings prebuilt
+COMBO_MESSAGES = [
   'Krabby Meal',
   'Double Krabby Meal',
   'Triple Krabby Meal',
@@ -55,3 +55,18 @@ DRINKS = [
   'Kelp Shake',
   'Seafoam Soda'
 ]
+
+# Basic Item creation w/ attributes
+
+# Item Attributes:
+# create_table "items", force: :cascade do |t|
+# string "name"
+# decimal "price", precision: 8, scale: 2, default: 0.0
+# integer "item_type"
+
+# Item.create(items)
+
+Topping.create(
+  name: 'Sea Cheese',
+  price: 0.25
+)

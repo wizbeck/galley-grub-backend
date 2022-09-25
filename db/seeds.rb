@@ -11,6 +11,8 @@ Item.destroy_all if Item.exists?
 Topping.destroy_all if Topping.exists?
 ItemTopping.destroy_all if ItemTopping.exists?
 
+puts 'Existing records destroyed'
+
 # Items
 items = [
   { name: 'Krabby Patty', price: 1.25, item_type: 'entree' },
@@ -53,3 +55,5 @@ entrees.each { |e| e.item_toppings.create(entree_toppings) }
 sides_drinks = Item.where(item_type: %w[side drink])
 size_toppings = Topping.where(name: %w[small medium large]).map { |t| { topping_id: t.id } }
 sides_drinks.each { |sd| sd.item_toppings.create(size_toppings) }
+
+puts 'Starting records created!'

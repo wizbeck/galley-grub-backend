@@ -1,5 +1,4 @@
-class OrderSerializer
-  include JSONAPI::Serializer
+class OrderSerializer < BaseSerializer
   attribute :order_number do |object|
     object.id.to_s.rjust(6, '0')
   end
@@ -7,5 +6,5 @@ class OrderSerializer
   attribute :total do |object|
     '%.2f' %object.total
   end
-  has_many :items
+  has_many :order_items
 end

@@ -3,7 +3,7 @@ class Order < ApplicationRecord
   has_many :order_items, dependent: :destroy
   has_many :order_item_toppings, through: :order_items
 
-  # Accept nested attributes for order_items
+  # Nested Attributes
   accepts_nested_attributes_for :order_items
 
   # Scopes

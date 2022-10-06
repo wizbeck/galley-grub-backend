@@ -1,10 +1,13 @@
-class OrderSerializer < BaseSerializer
-  attribute :order_number do |object|
-    object.id.to_s.rjust(6, '0')
+class OrderSerializer
+  extend ActiveSupport::NumberHelper
+  attributes :id, :cust_name
+  attribute :total do |order|
+    number_to_currency(order.total)
   end
-  attribute :cust_name
-  attribute :total do |object|
-    '%.2f' %object.total
-  end
-  has_many :order_items
+
+  has_many :order_items, serializer: OrderItemSerializer
+
+  # Relationship data, similar to activerecord macros
+  # specify serializer, to get the proper serialization of records to return in the api request
+
 end

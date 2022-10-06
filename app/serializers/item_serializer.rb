@@ -1,5 +1,11 @@
-class ItemSerializer
-  include JSONAPI::Serializer
-  attributes :name, :price
-  attribute :menu_type, &:item_type
+class ItemSerializer < BaseSerializer
+  extend ActiveSupport::NumberHelper
+
+  attributes :id, :name, :item_type
+  attribute :price do |item|
+    number_to_currency(item.price)
+  end
+
+  # Need to use options hash to specify attributes in the controller when instantiating ItemSerializer to retrive the proper values
+  has_many :toppings, serializer: ToppingSerializer
 end
